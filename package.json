@@ -1,7 +1,7 @@
 {
   "name": "nit_apifront",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple chat JQ + MYSQL + Node\r https://lordnani.github.io/NIT_Chat/",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,9 +16,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LordNani/NIT_APIFront/issues"
+    "url": "https://lordnani.github.io/NIT_Chat/issues"
   },
-  "homepage": "https://github.com/LordNani/NIT_APIFront#readme",
+  "homepage": "https://lordnani.github.io/NIT_Chat#readme",
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
@@ -37,5 +37,8 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }
