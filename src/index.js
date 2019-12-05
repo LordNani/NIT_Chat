@@ -2,4 +2,8 @@
 /* eslint-disable array-element-newline */
 import './scss/bootstrap/bootstrap.min.css';
 import './scss/main.scss';
-console.log("g");
+
+$('#register-btn').on('click', function () {
+    console.log("pressed register");
+    $('#register-form').toggle('show');
+});

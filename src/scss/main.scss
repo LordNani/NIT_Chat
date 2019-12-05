@@ -3,8 +3,11 @@ $font: 'Lato',
 sans-serif;
 
 $verydark: #4E4E4E;
-$dark:#dfdfdf;;
+$dark:#dfdfdf;
 
+.show{
+    display:block;
+}
 
 html {
     position: relative;
@@ -64,8 +67,8 @@ body {
 }
 
 
-#checkout-form {
-    z-index: 10000;
+#register-form {
+    z-index: 10;
     width: 60%;
     margin: 0px 20%;
     background-color: #EAEAEA;
