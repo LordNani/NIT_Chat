@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+$font: 'Lato',
+sans-serif;
+
+$verydark: #4E4E4E;
+$dark:#dfdfdf;;
+
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-family: $font;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background: $dark;
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    color: #000;
+    font-size: 1.2em;
+}
+
+
+.footer img {
+    max-width: 40px;
+    max-height: 40px;
+    transition: max-width 1s, max-height 1s, transform 1s;
+    &:hover {
+        max-width: 50px;
+        max-height: 50px;
+        transform: rotate(10deg);
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    text-align: center;
+    background-color: #212529;
+}
+
+
+.item-container {
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: $font, sans-serif;
+    text-transform: uppercase;
+}
+
+
+#checkout-form {
+    z-index: 10000;
+    width: 60%;
+    margin: 0px 20%;
+    background-color: #EAEAEA;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.post-message{
+    position: relative;
+    float: right;
+    border-radius: 4px;
+    width: auto;
+    height: auto;
+    font-size: 1.05em;
+    margin: 5px;
+    padding:4px;
+}
