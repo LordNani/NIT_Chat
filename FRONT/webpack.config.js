@@ -6,7 +6,7 @@ module.exports = {
         index: './src/index.js'
       },
     output: {
-        path: path.resolve(__dirname, 'docs'),
+        path: path.resolve(__dirname, '../docs'),
         filename: 'js/index.js'
     },
     module: {
@@ -34,7 +34,7 @@ module.exports = {
     },
 
     devServer: {
-        contentBase: path.join(__dirname, 'docs'),
+        contentBase: path.join(__dirname, '../docs'),
         compress: true,
         port: 9000
       },
