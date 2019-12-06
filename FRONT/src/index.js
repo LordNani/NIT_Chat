@@ -4,7 +4,6 @@ import './scss/bootstrap/bootstrap.min.css';
 import './scss/main.scss';
 
 $('#register-btn').on('click', function () {
-
     $('#register-form').toggle('show');
 });
 
@@ -29,11 +28,11 @@ window.onresize = function () {
 }
 
 $(document).on("click", function () {
-    // if (event.target != $('#register-btn')[0] && $(event.target).closest("form") != $('#register-form')[0]) {
-    //     console.log("bug");
-    //     $("#register-form")[0].style.display = "none";
-    //     $('#register-form')[0].reset();
-    // }
+    if (event.target != $('#register-btn')[0] && $(event.target).closest("form") != $('#register-form')[0]) {
+        console.log("bug");
+        $("#register-form")[0].style.display = "none";
+        $('#register-form')[0].reset();
+    }
 
     // if (!(event.target.matches('#dropdown-icon') || event.target.matches('.current-category'))) {
     //     var dropdowns = $(".dropdown-content");
