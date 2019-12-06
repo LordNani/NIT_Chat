@@ -51,14 +51,6 @@ app.use((req, res, next) => {
     next();
   });
 
-app.get('/mainpage', (req, res) => {
-    res.sendFile(path.join(__dirname + '/test.html'))
-})
-
-app.get('/anotherpage', (req, res) => {
-  res.send('another html file!')
-})
-
 app.post('/api/login', loginController)
 
 httpServer.listen(2000, () => console.log('yaboiii!'));

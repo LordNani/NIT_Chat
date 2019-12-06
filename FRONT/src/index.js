@@ -41,7 +41,6 @@ window.onresize = function () {
 $(document).on("click", function () {
 
     if (event.target != $('#register-btn')[0] && ($(event.target).closest("form")[0] != $('#register-form')[0])) {
-        console.log("bug");
         $("#register-form")[0].style.display = "none";
         $('#register-form')[0].reset();
     }
@@ -73,7 +72,7 @@ $("#register-form").submit(function (event) {
 });
 
 async function tryLogin(dataToSend) {
-    const result = await fetch('localhost://3030/login', {
+    const result = await fetch('http://localhost:3030/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -82,6 +81,7 @@ async function tryLogin(dataToSend) {
     })
 
     const body = await result.json();
+    console.log(body)
 }
 
 
