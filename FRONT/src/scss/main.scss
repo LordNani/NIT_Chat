@@ -220,8 +220,8 @@ body {
     max-height: 30px;
     transition: max-width 1s, max-height 1s, transform 1s;
     &:hover {
-        max-width: 30px;
-        max-height: 30px;
+        max-width: 50px;
+        max-height: 50px;
         transform: rotate(10deg);
     }
 }
