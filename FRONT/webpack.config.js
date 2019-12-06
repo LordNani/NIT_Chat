@@ -2,16 +2,12 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: ['babel-polyfill', './src/index.js'],
+    entry: ["babel-polyfill", "./src/index.js"],
     output: {
         path: path.resolve(__dirname, '../docs'),
         filename: 'js/index.js'
     },
     module: {
-        loaders: [
-            { test: /\.jsx?$/, loader: 'babel', }
-          ],
-
         rules: [
             {
                 test: /\.m?js$/,

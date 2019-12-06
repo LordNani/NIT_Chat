@@ -1,5 +1,5 @@
 {
-  "name": "nit_apifront",
+  "name": "nit_chat",
   "version": "1.0.0",
   "description": "Simple chat JQ + MYSQL + Node\r https://lordnani.github.io/NIT_Chat/",
   "main": "index.js",
