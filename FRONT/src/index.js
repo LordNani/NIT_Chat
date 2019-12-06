@@ -71,20 +71,18 @@ $("#register-form").submit(function (event) {
         login: $('#form-name').val(),
         passwd: $('#form-password').val()
     }
-    const dataToSend = JSON.stringify(data)
-    tryLogin(dataToSend);
+    tryLogin(data);
 });
 
 async function tryLogin(dataToSend) {
     console.log(dataToSend);
     const result = await fetch('http://localhost:2000/api/login', {
         method: 'POST',
+        body: JSON.stringify(dataToSend),
         headers: {
-            'Content-Type': 'application/json'
-        },
-        data: dataToSend
+            "Content-Type": "application/json; charset=utf-8"
+          }
     })
-
     const body = await result.json();
     console.log(body);
 }

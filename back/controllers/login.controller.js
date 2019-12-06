@@ -12,7 +12,6 @@ const wrongPassword = {
 
 const loginController = async (req, res) => {
     const { login, passwd } = req.body;
-    console.log("This is the req.body " + req.body);
     try {
         const result = await getUser(login)
         const { isAdmin, id, password } = result;

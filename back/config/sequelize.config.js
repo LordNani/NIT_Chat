@@ -10,6 +10,10 @@ const sequelize = new Sequelize('main_schema', 'root', 'TheDelta28super', {
         max: 20,
         min: 0,
         idle: 5000
+    },
+
+    define: {
+        timestamps: false
     }
 });
 
