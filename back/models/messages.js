@@ -1,6 +1,7 @@
 const sequelize = require('../config/sequelize.config');
 const Sequelize = require('sequelize');
 
+//creating table with 
 const Messages = sequelize.define('messages', {
     id: {
         type: Sequelize.INTEGER,

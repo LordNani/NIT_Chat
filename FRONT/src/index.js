@@ -5,6 +5,8 @@ import './scss/main.scss';
 
 let date = 0;
 
+//let socket = new WebSocket("wss://localhost:3030");
+
 $('#register-btn').on('click', function () {
     $('#register-form').toggle('show');
 });
@@ -41,7 +43,6 @@ window.onresize = function () {
 $(document).on("click", function () {
 
     if (event.target != $('#register-btn')[0] && ($(event.target).closest("form")[0] != $('#register-form')[0])) {
-        console.log("bug");
         $("#register-form")[0].style.display = "none";
         $('#register-form')[0].reset();
     }
@@ -64,28 +65,21 @@ function getWidth() {
 }
 
 
-$("form").submit(function (event) {
+$("#register-form").submit(async function (event) {
 
     event.preventDefault();
-    //  let dataToSend = 'token=' + token + '&' + $("form").serialize();
-    //console.log(dataToSend);
-    // $.post({
-    //     url: 'https://nit.tron.net.ua/api/order/add',
-    //     dataType: 'json',
-    //     data: dataToSend,
-    //     success(data) {
-    //         // console.log(data);
-    //         for (var error in data.errors) {
-    //             console.log(data.errors[error]);
-    //             postMessage(data.errors[error]);
-    //             return;
-    //         }
-    //         postMessage('Order created');
+    const dataToSend = $("form").serialize();
+    console.log(dataToSend);
+    const result = await fetch('localhost://3030/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: dataToSend
+    })
 
-    //     }
-    // });
+    const body = await result.json();
 });
-
 
 function postMessage(message) {
     $('.post-message').empty();
@@ -139,19 +133,5 @@ function testNewMsg() {
 
     $('#chat-wrapper').animate({
         scrollTop: $('#chat-wrapper').get(0).scrollHeight
-    }, 100);
+    }, 400);
 }
-
-// <div class="chat-message-container">
-// <img src='https://thewanderers.travel/data_content/meet-the-wanderers/blank-user-img.jpg'
-//     alt='user-logo' class='avatar'>
-// <div class='chat-message-wrapper'>
-//     <div class='chat-message-header'>
-//         <p class='user-name'>Gorborukov</p>
-//         <p class='send-date'>18:45</p>
-//     </div>
-//     <div class='chat-message-body'>
-//         cWszAELtnqJXIXfD2Kf2Rlgiq4fJio7nNHRaofB3kd8TLGDwtxtsnqHiasZvYWT3iRly8yAVWJW48CXvwMrunR38Y9sYYU36pBW6zeVmuHQDfSpa6FUsqTTUiDDfoxcp0kFLPaZt8UtM62jkfzfMGZ7KGXRQBOU6LNTxdbfMbaXUl8WGbZj6HOtsPca5Rte2G8UT3csO
-//     </div>
-// </div>
-// </div>

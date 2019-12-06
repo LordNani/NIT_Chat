@@ -17,7 +17,7 @@ const loginController = async (req, res) => {
                 token
             })
         } else {
-            res.status(400).json({error: 'No user found'})
+            res.status(400).json({error: 'User not found'})
         }
     } catch (error) {
         res.json(fail)
