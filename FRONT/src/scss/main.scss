@@ -6,7 +6,7 @@ $verydark: #4E4E4E;
 $dark:#dfdfdf;
 
 .show{
-    display:block;
+    display:none;
 }
 
 html {
@@ -16,12 +16,13 @@ html {
 
 body {
     font-family: $font;
+    font-size:20px;
 }
 
 .header {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     z-index: 2;
     background: $dark;
     position: absolute;
@@ -33,6 +34,22 @@ body {
     font-size: 1.2em;
 }
 
+#dropdown-icon {
+    max-width: 60px;
+    max-height: 60px;
+    margin: auto 20px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#register-btn{
+    position:relative;
+    display:inline-block;
+    width:100px;
+    height:70%;
+    margin:auto 10px;
+    padding:5px;
+}
 
 #main-container {
     margin:70px 0px;
@@ -49,7 +66,7 @@ body {
     font-family: $font, sans-serif;
 }
 
-#chat-container{
+#chat-body{
     display: block;
     flex-direction: column;
     width: 60%;
@@ -77,26 +94,85 @@ body {
     padding:2px;
 }
 
-.chat-message{
-    
+.chat-message-container{
+    position: relative;
+    display: flex;
+    height: auto;
+    min-height:50px;
+    padding: 2px 3px;
+    border: 1px solid #bfd8d5;
+    width: 100%;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+.avatar{ 
+    margin:2px 5px 3px 0px;
+    max-width:30px;
+    max-height:30px;
+    position:absolute;
+}
+
+.chat-message-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    width:100%;
+    margin-left: 35px;
+    overflow: hidden;
+    padding: 2px;
+}
+.chat-message-header{
+    font-size:0.60em;
+    position:relative;
+    padding:1px;
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width:100%;
+    max-height:18px;
+    margin:3px auto;
+}
+
+.user-name{
+    margin: auto 3px;
+    color: rgb(59, 89, 152);
+}
+
+.send-date{
+    color:#666666;
+    font-size:1em;
+    margin: 0px 4px;
+}
+
+.chat-message-body{
+    font-size:0.6em;
+    position:relative;
+    display: inline-block;
+    padding:2px;
+    overflow-wrap: break-word;
+    width:100%;
+    height: auto;
 }
 
 #input-wrapper{
     position:relative;
     display:flex;
     width:96%;
-    margin: auto;
+   margin: 4px auto;
     padding: 4px;
     height:15%;
     bottom:0;
     justify-content: space-around;
 }
 
-#InputTextArea{
+#input-text-area{
     margin:auto 10px;
     width:80%;
     height:90%;
     resize: none;
+    font-size:0.7em;
 }
 
 #send-btn{
@@ -157,4 +233,10 @@ body {
     left:0;
     text-align: center;
     background-color: #212529;
+}
+
+@media screen and (max-width:600px) {
+    #chat-body {
+        width: 90%;
+    }
 }
