@@ -2,6 +2,7 @@ const Users = require('../models/users')
 
 const getUser = async login => {
     try {
+        //console.log(Users.findAll({raw: true}));
         const res = await Users.findOne({
             where: {
                 login

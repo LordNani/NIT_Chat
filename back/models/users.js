@@ -2,7 +2,7 @@ const sequelize = require('../config/sequelize.config');
 const Sequelize = require('sequelize');
 
 const Users = sequelize.define('users', {
-    id: {
+    user_id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -16,7 +16,11 @@ const Users = sequelize.define('users', {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    isAdmin: {
+    admin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    },
+    isOnline: {
         type: Sequelize.BOOLEAN,
         allowNull: false
     }

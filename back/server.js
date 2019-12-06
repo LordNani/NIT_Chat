@@ -10,7 +10,7 @@ const ws = require('ws');
 
 const sequelize = require('./config/sequelize.config')
 
-const loginController = require('./controllers/login.contoller')
+const loginController = require('./controllers/login.controller')
 
 const { onConnection } = require('./realtime/handlers')
 //creating express server
@@ -51,7 +51,7 @@ app.use((req, res, next) => {
     next();
   });
 
-app.post('/api/login', loginController)
+app.post('/login', loginController);
 
 httpServer.listen(2000, () => console.log('yaboiii!'));
 
