@@ -2,14 +2,16 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: {
-        index: './src/index.js'
-      },
+    entry: ['babel-polyfill', './src/index.js'],
     output: {
         path: path.resolve(__dirname, '../docs'),
         filename: 'js/index.js'
     },
     module: {
+        loaders: [
+            { test: /\.jsx?$/, loader: 'babel', }
+          ],
+
         rules: [
             {
                 test: /\.m?js$/,
@@ -22,13 +24,13 @@ module.exports = {
                 }
             },
             {
-                    test: /\.(sa|sc|c)ss$/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        'css-loader',
-                        'sass-loader'
-                    ]
-                }
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ]
+            }
             // ...additional rules...
         ]
     },
@@ -37,7 +39,7 @@ module.exports = {
         contentBase: path.join(__dirname, '../docs'),
         compress: true,
         port: 9000
-      },
+    },
 
     plugins: [
         new MiniCssExtractPlugin({

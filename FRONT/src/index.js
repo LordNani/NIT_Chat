@@ -65,11 +65,15 @@ function getWidth() {
 }
 
 
-$("#register-form").submit(async function (event) {
+$("#register-form").submit(function (event) {
 
     event.preventDefault();
     const dataToSend = $("form").serialize();
     console.log(dataToSend);
+    tryLogin(dataToSend);
+});
+
+async function tryLogin(dataToSend) {
     const result = await fetch('localhost://3030/login', {
         method: 'POST',
         headers: {
@@ -79,7 +83,7 @@ $("#register-form").submit(async function (event) {
     })
 
     const body = await result.json();
-});
+}
 
 function postMessage(message) {
     $('.post-message').empty();

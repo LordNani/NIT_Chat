@@ -61,5 +61,5 @@ app.use((req, res, next) => {
 
 app.post('/login', loginController)
 
-httpServer.listen(3030, () => console.log('yaboiii!'));
+httpServer.listen(3030, () => console.log('Got message!'));
 
