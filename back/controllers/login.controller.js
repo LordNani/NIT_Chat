@@ -13,12 +13,13 @@ const wrongPassword = {
 const loginController = async (req, res) => {
     const { login, passwd } = req.body;
     try {
-        const result = await getUser(login)
-        const { isAdmin, id, password } = result;
+        const result = await getUser(login);
+        const { admin, user_id, password } = result;
         if (passwd === password) {
+            console.log(user_id + " aunuanawiwfn " + admin);
             res.status(200).json({
-                id,
-                isAdmin,
+                user_id,
+                admin,
             })
         } else {
             res.status(400).json(wrongPassword)
