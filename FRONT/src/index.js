@@ -77,13 +77,12 @@ $("#register-form").submit(function (event) {
 
 async function tryLogin(dataToSend) {
     console.log(dataToSend);
-    const result = await fetch('http://localhost:2000/login', {
+    const result = await fetch('http://localhost:2000/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         data: dataToSend
-
     })
 
     const body = await result.json();

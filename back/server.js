@@ -51,7 +51,7 @@ app.use((req, res, next) => {
     next();
   });
 
-app.post('/login', loginController);
+app.post('/api/login', loginController);
 
 httpServer.listen(2000, () => console.log('yaboiii!'));
 
