@@ -2,25 +2,21 @@ const sequelize = require('../config/sequelize.config');
 const Sequelize = require('sequelize');
 
 const Messages = sequelize.define('messages', {
-    id: {
+    message_id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
       },
-    from: {
+    author: {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    to: {
+    content: {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    text: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    date: {
+    send_time: {
         type: Sequelize.TEXT,
         allowNull: false
     }

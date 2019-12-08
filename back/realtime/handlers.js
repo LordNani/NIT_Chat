@@ -1,20 +1,39 @@
 'use strict'
 
 //will be used to access the database
-const { insertMessage, selectMessages, deleteMessage } = require('../repository/messages.repository')
+const { insertMessage, getMessages, deleteMessage } = require('../repository/messages.repository')
 
-//functio-handler that is used when web-socket connection happens
+const clients = new Set();
 
-const onConnection = ws => {
-    console.log('Connected!')
-    //handles messages from client
-    ws.on('message', (msg) => {
-        console.log(`Recieved message: ${msg}`)
-        console.log('Sending response')
-        ws.send(`From server: ${new Date()}`)
-    })
+
+const onMessage = async message => {
+    const data = JSON.parse(message);
+    console.log("message received");
+    if (data.action === 'delete' && +data.admin === true) {
+        const result = await deleteMessage(data.id)
+        const newMessages = await getMessages()
+        for (let client of clients) {
+            client.send(newMessages)
+        }
+    } else {
+        await insertMessage(data)
+        for (let client of clients) {
+            client.send(message)
+        }
+    }
 }
 
+const onConnection = async ws => {
+    console.log('Connected!')
+    clients.add(ws)
+    const messages = await getMessages();
+    const data = JSON.stringify(messages);
+    ws.send(data)   ;
+    ws.on('message', onMessage)
+}
+
+
 module.exports = {
-    onConnection
+    onConnection,
+    onMessage
 }

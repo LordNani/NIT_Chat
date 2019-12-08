@@ -5,7 +5,6 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
-
 const ws = require('ws');
 
 
@@ -13,7 +12,7 @@ const sequelize = require('./config/sequelize.config')
 
 const loginController = require('./controllers/login.controller')
 
-const { onConnection } = require('./realtime/handlers')
+const { onConnection, onMessage } = require('./realtime/handlers')
 //creating express server
 const app = express();
 const httpServer = http.createServer(app);
@@ -24,6 +23,7 @@ const wss = new ws.Server({server: httpServer});
 
 //handling connections to socket
 wss.on('connection', onConnection)
+wss.on('message', onMessage)
 
 //sync with database 
 sequelize.sync().then(result => {
@@ -52,7 +52,17 @@ app.use((req, res, next) => {
     next();
   });
 
-app.post('/api/login', loginController);
+app.get('/mainpage', (req, res) => {
+    res.sendFile(path.join(__dirname + '/test.html'))
+})
+
+app.get('/anotherpage', (req, res) => {
+  res.send('another html file!')
+})
+
+app.post('/api/login', loginController)
+
+
 
 httpServer.listen(2000, () => console.log('yaboiii!'));
 
