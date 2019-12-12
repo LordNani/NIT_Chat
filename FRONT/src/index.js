@@ -6,7 +6,7 @@ import './scss/bootstrap/bootstrap.min.css';
 import './scss/main.scss';
 const serverIp = 'ec2-35-180-253-99.eu-west-3.compute.amazonaws.com';
 const serverPort = '3030';
-const ws = new WebSocket('ws://' + serverIp + ':' + serverPort + '/');
+const ws = new WebSocket('wss://' + serverIp + ':' + serverPort + '/');
 let firstTime = true;
 ws.onopen = function (event) {
     //  console.log("Connected");
