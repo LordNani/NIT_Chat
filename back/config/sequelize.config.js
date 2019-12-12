@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize('main_schema', 'root', 'TheDelta28super', {
+const sequelize = new Sequelize('main_schema', 'admin', 'minecraftdelta', {
     dialect: "mysql",
-    host: "localhost",
+    host: "database-chat-mysql.czyhpes6bql6.eu-west-3.rds.amazonaws.com",
     ssl: false,
     logging:  console.log,
     
@@ -11,7 +11,6 @@ const sequelize = new Sequelize('main_schema', 'root', 'TheDelta28super', {
         min: 0,
         idle: 5000
     },
-
     define: {
         timestamps: false
     }

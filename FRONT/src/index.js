@@ -1,23 +1,27 @@
+/* eslint-disable prefer-named-capture-group */
+/* eslint-disable require-unicode-regexp */
 /* eslint-disable multiline-comment-style */
 /* eslint-disable array-element-newline */
 import './scss/bootstrap/bootstrap.min.css';
 import './scss/main.scss';
-const ws = new WebSocket('ws://10.0.207.44:2000/');
+const serverIp = 'ec2-35-180-253-99.eu-west-3.compute.amazonaws.com';
+const serverPort = '3030';
+const ws = new WebSocket('ws://' + serverIp + ':' + serverPort + '/');
 let firstTime = true;
 ws.onopen = function (event) {
-  //  console.log("Connected");
-  //  console.log(getCookie('user'));
+    //  console.log("Connected");
+    //  console.log(getCookie('user'));
 };
 
-ws.onmessage = function(event) {
+ws.onmessage = function (event) {
     //console.log(event.data);
     const data = JSON.parse(event.data);
-    if(firstTime){
-    firstTime = false;
-     console.log(data);
-     for (var msg of data) {
-        generateMessage(msg.content, msg.send_time, msg.author);
-     }
+    if (firstTime) {
+        firstTime = false;
+        console.log(data);
+        for (var msg of data) {
+            generateMessage(msg.content, msg.send_time, msg.author);
+        }
     } else {
         generateMessage(data.content, data.send_time, data.author);
     }
@@ -65,7 +69,7 @@ $("#input-text-area").keypress(function (e) {
 });
 
 function sendMessage(dataToSend) {
-   // console.log(JSON.stringify(dataToSend));
+    // console.log(JSON.stringify(dataToSend));
     ws.send(JSON.stringify(dataToSend));
 }
 
@@ -115,20 +119,16 @@ $("#register-form").submit(function (event) {
     tryLogin(data);
 });
 
-$(document).on("click", function () {
-//console.log($(this).parent(".chat-message-container").attr('id'));
-});
-
 
 async function tryLogin(dataToSend) {
     console.log(dataToSend);
-    const result = await fetch('http://10.0.207.44:2000/api/login', {
+    const result = await fetch('http://' + serverIp + ':' + serverPort + '/api/login', {
         method: 'POST',
         body: JSON.stringify(dataToSend),
         headers: {
             "Content-Type": "application/json; charset=utf-8"
         }
-    })      
+    });
     const body = await result.json();
     if (body.success !== false) {
         console.log("Log in");
@@ -193,22 +193,8 @@ function generateMessage(content, date, author) {
     }, 0);
 }
 
-// <div class="chat-message-container">
-// <img src='https://thewanderers.travel/data_content/meet-the-wanderers/blank-user-img.jpg'
-//     alt='user-logo' class='avatar'>
-// <div class='chat-message-wrapper'>
-//     <div class='chat-message-header'>
-//         <p class='user-name'>Gorborukov</p>
-//         <p class='send-date'>18:45</p>
-//     </div>
-//     <div class='chat-message-body'>
-//         cWszAELtnqJXIXfD2Kf2Rlgiq4fJio7nNHRaofB3kd8TLGDwtxtsnqHiasZvYWT3iRly8yAVWJW48CXvwMrunR38Y9sYYU36pBW6zeVmuHQDfSpa6FUsqTTUiDDfoxcp0kFLPaZt8UtM62jkfzfMGZ7KGXRQBOU6LNTxdbfMbaXUl8WGbZj6HOtsPca5Rte2G8UT3csO
-//     </div>
-// </div>
-// </div>
-
 function getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
+    const matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
@@ -218,7 +204,6 @@ function setCookie(name, value, options = {}) {
 
     options = {
         path: '/',
-        // при необходимости добавьте другие значения по умолчанию
         ...options
     };
 

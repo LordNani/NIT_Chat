@@ -1,7 +1,7 @@
 const sequelize = require('../config/sequelize.config');
 const Sequelize = require('sequelize');
 
-const Messages = sequelize.define('messages', {
+const Messages = sequelize.define('Messages', {
     message_id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
