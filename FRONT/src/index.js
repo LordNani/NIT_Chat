@@ -10,7 +10,7 @@ const ws = new WebSocket('ws://' + serverIp + ':' + serverPort + '/');
 let firstTime = true;
 ws.onopen = function (event) {
     //  console.log("Connected");
-    //  console.log(getCookie('user'));
+     console.log(getCookie('user'));
 };
 
 ws.onmessage = function (event) {
@@ -18,7 +18,7 @@ ws.onmessage = function (event) {
     const data = JSON.parse(event.data);
     if (firstTime) {
         firstTime = false;
-        console.log(data);
+//        console.log(data);
         for (var msg of data) {
             generateMessage(msg.content, msg.send_time, msg.author);
         }
@@ -33,34 +33,24 @@ ws.onclose = function (e) {
 };
 
 function pressSend() {
+    if ($('#input-text-area').val().length > 0 && getCookie('user').length > 0) {
     const today = new Date();
-    //send ajax
-    //console.log("sending message");
+    console.log('Current user stored in cookies: ' + getCookie('user'));
     const data = {
         author: getCookie('user'),
         content: $('#input-text-area').val(),
+        // eslint-disable-next-line camelcase
         send_time: today.getHours() + ":" + today.getMinutes()
     }
     $('#input-text-area').val('');
     sendMessage(data);
+ }
+ else
+    console.log('Area is empty, or user not logged in');
 }
-
-$('#register-btn').on('click', function () {
-    $('#register-form').toggle('show');
-});
-
-$('#send-btn').on('click', function () {
-    pressSend();
-
-});
-
-$("#dropdown-icon").on("click", function () {
-    $("#users-dropdown").toggle("show");
-});
 
 $("#input-text-area").keypress(function (e) {
     const code = e.keyCode || e.which;
-    // && getCookie('name') !== null && $('#input-text-area').val() > 0   getCookie('user').length > 0
     if (code == 13) {
         pressSend();
         $(this).val('');
@@ -80,7 +70,6 @@ window.onresize = function () {
         users.appendTo($('#users-dropdown'));
     } else
         users.insertBefore($('#chat-body'));
-
 }
 
 $(document).on("click", function () {
@@ -89,17 +78,6 @@ $(document).on("click", function () {
         $("#register-form")[0].style.display = "none";
         $('#register-form')[0].reset();
     }
-
-    // if (!(event.target.matches('#dropdown-icon') || event.target.matches('.current-category'))) {
-    //     var dropdowns = $(".dropdown-content");
-    //     for (var openDropdown of dropdowns) {
-
-    //         if (openDropdown.style.display != "none") {
-    //             openDropdown.style.display = "none";
-    //             console.log(openDropdown);
-    //         }
-    //     }
-    // }
 });
 
 
@@ -121,7 +99,6 @@ $("#register-form").submit(function (event) {
 
 
 async function tryLogin(dataToSend) {
-    console.log(dataToSend);
     const result = await fetch('http://' + serverIp + ':' + serverPort + '/api/login', {
         method: 'POST',
         body: JSON.stringify(dataToSend),
@@ -132,7 +109,7 @@ async function tryLogin(dataToSend) {
     const body = await result.json();
     if (body.success !== false) {
         console.log("Log in");
-        document.cookie = "user=" + dataToSend.login + "; max-age=3600";
+        document.cookie = "user=" + dataToSend.login + "; max-age=60";
     }
     //console.log(body);
 }
@@ -200,26 +177,15 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-function setCookie(name, value, options = {}) {
+$('#register-btn').on('click', function () {
+    $('#register-form').toggle('show');
+});
 
-    options = {
-        path: '/',
-        ...options
-    };
+$('#send-btn').on('click', function () {
+    pressSend();
 
-    if (options.expires.toUTCString) {
-        options.expires = options.expires.toUTCString();
-    }
+});
 
-    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-
-    for (let optionKey in options) {
-        updatedCookie += "; " + optionKey;
-        let optionValue = options[optionKey];
-        if (optionValue !== true) {
-            updatedCookie += "=" + optionValue;
-        }
-    }
-
-    document.cookie = updatedCookie;
-}
+$("#dropdown-icon").on("click", function () {
+    $("#users-dropdown").toggle("show");
+});
