@@ -3,7 +3,7 @@
 require('dotenv').config()
 const express = require('express');
 const path = require('path');
-const http = require('http');
+const https = require('https');
 const bodyParser = require('body-parser');
 const ws = require('ws');
 
@@ -15,11 +15,11 @@ const loginController = require('./controllers/login.controller')
 const { onConnection, onMessage } = require('./realtime/handlers')
 //creating express server
 const app = express();
-const httpServer = http.createServer(app);
+const httpsServer = https.createServer(app);
 
 //creating new websokcet server
 
-const wss = new ws.Server({server: httpServer});
+const wss = new ws.Server({server: httpsServer});
 
 //handling connections to socket
 wss.on('connection', onConnection)
@@ -64,5 +64,5 @@ app.post('/api/login', loginController)
 
 
 
-httpServer.listen(3030, () => console.log('I am listening!'));
+httpsServer.listen(3030, () => console.log('I am listening!'));
 

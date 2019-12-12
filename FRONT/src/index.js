@@ -99,7 +99,7 @@ $("#register-form").submit(function (event) {
 
 
 async function tryLogin(dataToSend) {
-    const result = await fetch('http://' + serverIp + ':' + serverPort + '/api/login', {
+    const result = await fetch('https://' + serverIp + ':' + serverPort + '/api/login', {
         method: 'POST',
         body: JSON.stringify(dataToSend),
         headers: {
