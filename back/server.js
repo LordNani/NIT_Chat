@@ -4,8 +4,10 @@ require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const https = require('https');
+const fs = require('fs');
 const bodyParser = require('body-parser');
-const ws = require('ws');
+const ws = new require('ws');
+const forceSsl = require('express-force-ssl');
 
 
 const sequelize = require('./config/sequelize.config')
@@ -13,13 +15,20 @@ const sequelize = require('./config/sequelize.config')
 const loginController = require('./controllers/login.controller')
 
 const { onConnection, onMessage } = require('./realtime/handlers')
+
+const key = fs.readFileSync('privatekey.pem').toString();
+const cert = fs.readFileSync('certificate.pem').toString();
+
+const ca = fs.readFileSync('intermediate.pem').toString();
+
+const credentials = { key, cert, ca };
 //creating express server
 const app = express();
-const httpsServer = https.createServer(app);
+const httpsServer = https.createServer(credentials, app);
 
 //creating new websokcet server
 
-const wss = new ws.Server({server: httpsServer});
+const wss = new ws.Server({server:httpsServer});
 
 //handling connections to socket
 wss.on('connection', onConnection)

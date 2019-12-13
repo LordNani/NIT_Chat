@@ -4,12 +4,13 @@
 /* eslint-disable array-element-newline */
 import './scss/bootstrap/bootstrap.min.css';
 import './scss/main.scss';
-const serverIp = 'ec2-35-180-253-99.eu-west-3.compute.amazonaws.com';
-const serverPort = '3030';
+const serverIp = 'ec2-35-180-159-220.eu-west-3.compute.amazonaws.com';
+//const serverIp = 'localhost';
+const serverPort = '8443';
 const ws = new WebSocket('wss://' + serverIp + ':' + serverPort + '/');
 let firstTime = true;
 ws.onopen = function (event) {
-    //  console.log("Connected");
+     console.log("Connected");
      console.log(getCookie('user'));
 };
 
@@ -33,7 +34,7 @@ ws.onclose = function (e) {
 };
 
 function pressSend() {
-    if ($('#input-text-area').val().length > 0 && getCookie('user').length > 0) {
+    if (typeof $('#input-text-area').val() !== 'undefined' && typeof getCookie('user') !== 'undefined') {
     const today = new Date();
     console.log('Current user stored in cookies: ' + getCookie('user'));
     const data = {
@@ -43,7 +44,7 @@ function pressSend() {
         send_time: today.getHours() + ":" + today.getMinutes()
     }
     $('#input-text-area').val('');
-    sendMessage(data);
+    ws.send(JSON.stringify(data));
  }
  else
     console.log('Area is empty, or user not logged in');
@@ -57,12 +58,6 @@ $("#input-text-area").keypress(function (e) {
         e.preventDefault();
     }
 });
-
-function sendMessage(dataToSend) {
-    // console.log(JSON.stringify(dataToSend));
-    ws.send(JSON.stringify(dataToSend));
-}
-
 
 window.onresize = function () {
     const users = $('#users-wrapper').detach();
@@ -99,7 +94,7 @@ $("#register-form").submit(function (event) {
 
 
 async function tryLogin(dataToSend) {
-    const result = await fetch('https://' + serverIp + ':' + serverPort + '/api/login', {
+    const result = await fetch('http://' + serverIp + ':' + serverPort + '/api/login', {
         method: 'POST',
         body: JSON.stringify(dataToSend),
         headers: {

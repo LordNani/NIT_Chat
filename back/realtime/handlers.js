@@ -24,6 +24,7 @@ const onMessage = async message => {
 }
 
 const onConnection = async ws => {
+    wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
     console.log('Connected!')
     clients.add(ws)
     const messages = await getMessages();
